@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="news_header">Учителя</h1>
+        <div class="row">
+            {% for teacher in teachers %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="#">
+                        <img class="card-img-top"
+                             src="{{ teacher.img.url }}"
+                             alt="">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ teacher.name }}
+                        </h4>
+                        <p class="card-text">{{ teacher.description }}</p>
+
+                    </div>
+                    <!-- <div class="card-footer text-center">
+                        <button type="button" class="btn btn-outline-success">Подробнее</button>
+                    </div> -->
+                </div>
+            </div>
+            {% endfor %}
+
+
+        </div>
+    </div>
+{% endblock %}

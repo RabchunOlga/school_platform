@@ -1,0 +1,54 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <a class="header-logo" href="/">SCHOOL</a>
+        <nav class="header-menu">
+            <ul class="header-menu-list">
+                <li class="header-menu-item"><a class="header-menu-link" href="{% url 'school:about_us' %}">О нас</a></li>
+                <li class="header-menu-item"><a class="header-menu-link" href="{% url 'school:teachers' %}">Преподаватели</a></li>
+                <li class="header-menu-item"><a class="header-menu-link" href="{% url 'school:admission' %}">Поступление</a></li>
+                <li class="header-menu-item"><a class="header-menu-link" href="{% url 'school:paid_services' %}">Платные услуги</a></li>
+              
+            </ul>
+        </nav>
+    </header>
+
+    {% block main %}{% endblock %}
+
+    <footer class="footer">
+        <div class="footer_wrapper">
+            <div class="footer_container">
+                <div class="footer_contacts">
+                    <p class="footer_item">Контакты</p>
+                    <p>+375(29)305-55-78</p>
+                    +375(33)880-95-17
+                </div>
+                <div class="footer_location">
+                    <p class="footer_item">Адрес</p>
+                    <p>г.Минск ул.Революционная 8</p>
+                    <p>.</p>
+                </div>
+                <div class="footer_working_hours">
+                    <p class="footer_item">Рабочие часы</p>
+                    <p>пн-пт 09:00-18:00</p>
+                    сб-вс 10:00-16:00
+                </div>           
+            </div>
+            <div>
+                <p class="footer_logo">SCHOOL</p>
+            </div>
+        </div>
+    </footer>
+    
+</body>
+</html>

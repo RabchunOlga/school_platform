@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block main %}
+    <div class="container">
+        <img class="school_baner" src="{% static 'img/school.jpg' %}" alt="school">
+        <nav class="header-menu">
+            <ul class="header-menu-list">
+                <li class="header-menu-item"><a class="school-menu-link" href="{% url 'school:departments' %}">Структура и органы управления</a></li>
+                <li class="header-menu-item"><a class="school-menu-link" href="{% url 'school:requirements' %}">Образовательные стандарты и требования</a></li>
+                <li class="header-menu-item"><a class="school-menu-link" href="{% url 'school:equipment' %}">Материально-техническое обеспечение</a></li>
+                <li class="header-menu-item"><a class="school-menu-link" href="{% url 'school:scholarship' %}">Стипендии </a></li>
+              
+            </ul>
+        </nav>
+        <h1 class="news_header">Новости</h1>
+        <div class="row">
+            {% for new in news %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card h-100">
+                        <a href="#">
+                            <img class="card-img-top"
+                                 src="{{ new.img.url }}"
+                                 alt="">
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">
+                                {{ new.name }}
+                            </h4>
+
+                        </div>
+                        <div class="card-footer text-center">
+{#                            <button type="button" class="btn btn-outline-success">Подробнее</button>#}
+                            <a class="btn btn-outline-success" href="{% url 'school:news_one' new.id %}">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+
+        </div>
+        <nav class="paginator" aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item {% if not news.has_previous %} disabled {% endif %}">
+                    <a class="page-link"
+                       href="{% if news.has_previous %} {% url 'school:paginator' news.previous_page_number %} {% else %} # {% endif %}"
+                       tabindex="-1" aria-disabled="true">Предыдущая</a>
+                </li>
+                {% for page in news.paginator.page_range %}
+                    <li class="page-item">
+                        <a class="page-link" href="{% url 'school:paginator' page %}">{{ page }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item {% if not news.has_next %} disabled {% endif %}">
+                    <a class="page-link"
+                       href="{% if news.has_next %} {% url 'school:paginator' news.next_page_number %} {% else %} # {% endif %}">
+                        Следующая
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <h2 class="news_header">Задать вопрос</h2>
+        <form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.question.id_for_label }}">Напиши вопрос</label>
+{#                <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Your question">#}
+                {{form.question}}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.email.id_for_label }}">Email адресс</label>
+{#              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">#}
+                {{form.email}}
+              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </form>
+    
+    </div>
+
+{% endblock %}

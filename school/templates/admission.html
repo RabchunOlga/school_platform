@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div class="container">
+        <h1 class="news_header">Заполните форму на поступление</h1>
+        <form action="{% url 'school:admission' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.student_name.id_for_label }}">ФИО ученика</label>
+                {{form.student_name}}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.parent_name.id_for_label }}">ФИО родителя</label>
+                {{ form.parent_name }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.class_number.id_for_label }}">Класс</label>
+                {{ form.class_number }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.student_pd.id_for_label }}">ПД ученика</label>
+                {{ form.student_pd }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.parent_pd.id_for_label }}">ПД родителя</label>
+                {{ form.parent_pd }}
+            </div>
+            <button type="submit" class="btn btn-primary">Отправить</button>
+          </form>
+
+    </div>
+{% endblock %}
